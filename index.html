@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시드니 무계획 이대로만 BEST 10</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .content {
+            padding: 50px 40px;
+        }
+
+        .best-item {
+            margin-bottom: 60px;
+            padding: 30px;
+            background: linear-gradient(135deg, #fdfbfb 0%, #f7f7f7 100%);
+            border-radius: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .best-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .best-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            font-size: 1.2em;
+            font-weight: 700;
+            padding: 8px 20px;
+            border-radius: 25px;
+            margin-bottom: 15px;
+        }
+
+        .best-title {
+            font-size: 2em;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .best-emoji {
+            font-size: 1.2em;
+        }
+
+        .best-description {
+            font-size: 1.25em;
+            line-height: 1.9;
+            color: #4a5568;
+            margin-bottom: 20px;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            color: white;
+            font-weight: 600;
+            margin-top: 20px;
+            border: 3px dashed rgba(255,255,255,0.5);
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 1.3em;
+            font-weight: 700;
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            margin: 40px auto;
+            display: block;
+            width: fit-content;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        .footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            font-size: 1.1em;
+        }
+
+        .divider {
+            height: 3px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            margin: 40px 0;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            .best-title {
+                font-size: 1.5em;
+            }
+
+            .best-description {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌏 시드니 무계획 이대로만 BEST 10 ✨</h1>
+            <p>직접 경험한 시드니 여행 베스트 스팟</p>
+        </div>
+
+        <div class="content">
+            <!-- BEST 1 -->
+            <div class="best-item">
+                <span class="best-number">BEST 1</span>
+                <h2 class="best-title">
+                    <span class="best-emoji">📸</span>
+                    Best Photo : 시드니 천문대
+                </h2>
+                <p class="best-description">
+                    여기오면 한국 사람들이 제일 많더라고요, <span class="highlight">좋은 건 우리나라 사람들이 제일 잘 아나봐요</span> :)
+                </p>
+                <div class="image-placeholder">🖼️ 시드니 천문대 사진 자리</div>
+            </div>
+
+            <!-- BEST 2 -->
+            <div class="best-item">
+                <span class="best-number">BEST 2</span>
+                <h2 class="best-title">
+                    <span class="best-emoji">☕</span>
+                    Best Coffee : LEIBLE 커피
+                </h2>
+                <p class="best-description">
+                    아이스라떼도, 플랫화이트도 둘 다 맛있어서 너무 좋았던 곳.
+                </p>
+                <div class="image-placeholder">🖼️ LEIBLE 커피 사진 자리</div>
+            </div>
+
+            <!-- BEST 3 -->
+            <div class="best-item">
+                <span class="best-number">BEST 3</span>
+                <h2 class="best-title">
+                    <span class="best-emoji">🍳</span>
+                    Best Brunch : Ground of City
+                </h2>
+                <p class="best-description">
+                    Bar 자리에 앉아서 한가하게 먹던 브런치가 황홀함으로 기억에 남아요. <span class="highlight">많은 분들이 베스트브런치로 꼽더라고요.</span>
+                </p>
+                <div class="image-placeholder">🖼️ Ground of City 브런치 사진 자리</div>
+            </div>
+
+            <!-- BEST 4 -->
+            <div class="best-item">
+                <span class="best-number">BEST 4</span>
+                <h2 class="best-title">
+                    <span class="best-emoji">🛍️</span>
+                    Best Shopping : DFO 홈부쉬, 패디스마켓
+                </h2>
+                <p class="best-description">
+                    아이들 껀 <span class="highlight">스미글</span>, 아이들&어른들 나이키 제품도 많고 특템해서 좋았어요. 기념품(마그넷, 인형 등)이랑 아이들 축구유니폼(선물) 사기엔 패디스마켓이 짱 좋아요.
+                </p>
+                <div class="image-placeholder">🖼️ 쇼핑 사진 자리</div>
+            </div>
+
+            <!-- BEST 5 -->
+            <div class="best-item">
+                <span class="best-number">BEST 5</span>
+                <h2 class="best-title">
+                    <span class="best-emoji">📚</span>
+                    Best Reading & Picnic : 하이드파크
+                </h2>
+                <p class="best-description">
+                    아이들은 공, 저는 책을 챙겨서 피크닉 매트 깔고 헝그리잭스 포장해서 피크닉하던 순간이 제일 기억에 남습니다.<br>
+                    <span class="highlight">이런게 진짜 여행이고 여유죠...</span><br><br>
+                    <em>&lt;우리의 겨울이 호주의 여름을 만나면&gt; 에세이도 가져가서 읽으면 환상이겠죠 :)</em>
+                </p>
+                <div class="image-placeholder">🖼️ 하이드파크 피크닉 사진 자리</div>
+            </div>
+
+            <!-- BEST 6 -->
+            <div class="best-item">
+                <span class="best-number">BEST 6</span>
+                <h2 class="best-title">
+                    <span class="best-emoji">🌉</span>
+                    Best Walk : 하버브리지 건너기
+                </h2>
+                <p class="best-description">
+                    저녁을 배불리 먹고, 서큘러키에서 페리를 타고 밀슨스포인트에서 하차한 뒤 노스시드니 방면에서 하버브리지를 건너 걸어오면 해가 지고, 천문대까지 걸어오면 제일 멋진 일몰까지 감상할 수 있습니다. <span class="highlight">이 코스 강력추천할게요.</span><br><br>
+                    액자 걸고 싶은 베스트 포토<br>
+                    안전지키미 아저씨들 수고많으시죠. :)<br>
+                    <strong>이 뷰는 하버브리지 위에서만 만날 수 있어요!</strong>
+                </p>
+                <div class="image-placeholder">🖼️ 하버브리지 사진 자리</div>
+            </div>
+
+            <!-- BEST 7 -->
+            <div class="best-item">
+                <span class="best-number">BEST 7</span>
+                <h2 class="best-title">
+                    <span class="best-emoji">🏖️</span>
+                    Best Beach : 타마라마 비치
+                </h2>
+                <p class="best-description">
+                    본다이에서 브론테까지 걸어가다가 지쳐서 멈춘 곳, 작긴 하지만 오히려 <span class="highlight">아이들 놀기에 너무 좋았고</span> 저도 모래위를 바라보던 시간이 참 오래 기억에 남는 곳이에요.<br><br>
+                    유수풀 수준의 파도에서 너무 잘 놀았던 추억!
+                </p>
+                <div class="image-placeholder">🖼️ 타마라마 비치 사진 자리</div>
+            </div>
+
+            <!-- BEST 8 -->
+            <div class="best-item">
+                <span class="best-number">BEST 8</span>
+                <h2 class="best-title">
+                    <span class="best-emoji">🥩</span>
+                    Best Dinner : KOBE
+                </h2>
+                <p class="best-description">
+                    <span class="highlight">와규 뷔페</span>입니다. 호주산 소고기, 돼지고기, 양고기, 해산물 등 화로에 마음껏 구워먹는데 이 가격이면 한국과 비교해도 손색이 없고, 아이들과는 피시앤칩스나 버거 먹고 100불 넘게 나왔던 시간들과 비교하면 가성비 좋은 곳이라고 생각합니다. 특히 입맛 까다로운 아이가 여기서 좋아하는 계란 초밥을 비롯해서 먹고 싶은 걸 마음껏 배불리 먹을 때 기분이 좋았어요.<br><br>
+                    <em>스시 런치가 생겼네요!!!</em>
+                </p>
+                <div class="image-placeholder">🖼️ KOBE 레스토랑 사진 자리</div>
+            </div>
+
+            <!-- BEST 9 -->
+            <div class="best-item">
+                <span class="best-number">BEST 9</span>
+                <h2 class="best-title">
+                    <span class="best-emoji">🏨</span>
+                    Best Accommodation : 메리톤 (켄트)
+                </h2>
+                <p class="best-description">
+                    위치가 제일 좋고, <span class="highlight">2호라인 일몰이 끝내줍니다.</span> 가격이 많이 올랐는데요, 미리 예약하고 수시로 가격체크하면서 저렴한 가격으로 예약하시면 괜찮을 듯 해요. 취사가 가능하니 호텔보다 가성비 좋다고 생각합니다. 메리톤 레지던스는 다 비슷비슷 하지만, 켄트를 좋아했던 이유는 오로지 뷰 때문입니다. (제가 뷰에 너무 진심이라..) 수영장도 마음껏 이용해서 좋았고요. 비싼 값어치를 하게끔 숙소를 잘 활용했어요. ^^
+                </p>
+                <div class="image-placeholder">🖼️ 메리톤 켄트 뷰 사진 자리</div>
+            </div>
+
+            <!-- BEST 10 -->
+            <div class="best-item">
+                <span class="best-number">BEST 10</span>
+                <h2 class="best-title">
+                    <span class="best-emoji">🌅</span>
+                    Best Thing : 아침산책
+                </h2>
+                <p class="best-description">
+                    제가 아침산책 많이 강조했는데.. <span class="highlight">6-7시에 이미 환해진 시티를 걸으면 진짜 좋습니다.</span> 전 아줌마라 용감했는데, 혹시 위험할지 모르니 동행과 큰길로 다니세요^^ 트램라인으로 걸어서 오페라하우스 걸으시면 평소 북적이는 오페라하우스에 사람 없어서 사진찍기도 좋아요. 맑은 공기 마시면서, 에어팟 끼고 음악감상하며, 하이드파크에서도 산책하고 독서하는 사람들 보며 걸으면 좋은 에너지를 받습니다. (살빠지는 건 덤이겠죠?)<br><br>
+                    <strong>뒤에 사람 한명도 없는 오페라하우스 사진 처음이죠?</strong>
+                </p>
+                <div class="image-placeholder">🖼️ 아침 오페라하우스 사진 자리</div>
+            </div>
+
+            <div class="divider"></div>
+
+            <p class="best-description" style="text-align: center; margin: 40px 0;">
+                위의 BEST 10은 지난 게시글에서 핵심만 간추린 요약본이라고 해도 무방하겠네요.<br>
+                제일 좋았던 곳만 모았으니까요. 요번에 가서 또 Best 발굴하고 싶어요!!<br>
+                각각의 자세한 정보는 지난 게시글들에 세세하게 남아있으니 열어보시고 참고바랍니다.
+            </p>
+
+            <a href="#" class="cta-button">✈️ 시드니 여행 떠나기</a>
+        </div>
+
+        <div class="footer">
+            <p>🌟 시드니 무계획 여행 가이드 🌟</p>
+            <p style="font-size: 0.9em; opacity: 0.8; margin-top: 10px;">Made with ❤️ for Sydney Travelers</p>
+        </div>
+    </div>
+</body>
+</html>
