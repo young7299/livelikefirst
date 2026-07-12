@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>나의 운 테스트</title>
+<style>
+  :root {
+    --bg: #f6f7fb;
+    --card: #ffffff;
+    --text: #22252b;
+    --muted: #6b7280;
+    --line: #e6e8ef;
+    --accent: #4b5bd6;
+    --accent-dark: #3a48b8;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    line-height: 1.6;
+  }
+  .card {
+    background: var(--card);
+    width: 100%;
+    max-width: 480px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(30, 34, 55, 0.10);
+    padding: 34px 26px;
+    text-align: center;
+  }
+  .screen { display: none; }
+  .screen.active { display: block; animation: fade .35s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  h1 { font-size: 1.35rem; margin: 0 0 14px; letter-spacing: -0.3px; }
+  .lead {
+    font-size: 1.12rem;
+    font-weight: 600;
+    margin: 8px 0 26px;
+    word-break: keep-all;
+  }
+  .sub { color: var(--muted); font-size: .95rem; word-break: keep-all; }
+
+  .btn {
+    display: inline-block;
+    width: 100%;
+    border: none;
+    border-radius: 14px;
+    padding: 15px 18px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    background: var(--accent);
+    color: #fff;
+    transition: background .15s, transform .05s;
+  }
+  .btn:hover { background: var(--accent-dark); }
+  .btn:active { transform: scale(.98); }
+  .btn:disabled { background: #c7cbdd; cursor: not-allowed; }
+  .btn.secondary {
+    background: #eef0f8; color: var(--accent-dark);
+  }
+  .btn.secondary:hover { background: #e2e5f4; }
+
+  .field {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 1.05rem;
+    border: 2px solid var(--line);
+    border-radius: 14px;
+    outline: none;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .field:focus { border-color: var(--accent); }
+
+  /* progress */
+  .progress-wrap { margin-bottom: 20px; }
+  .progress-text { font-size: .9rem; color: var(--muted); margin-bottom: 8px; }
+  .progress-bar { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 0; background: var(--accent); border-radius: 99px; transition: width .3s ease; }
+
+  .question {
+    font-size: 1.18rem;
+    font-weight: 700;
+    min-height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 22px;
+    word-break: keep-all;
+  }
+  .yn { display: flex; gap: 12px; margin-bottom: 22px; }
+  .yn button {
+    flex: 1;
+    padding: 20px 0;
+    font-size: 1.15rem;
+    font-weight: 800;
+    border: 2px solid var(--line);
+    border-radius: 16px;
+    background: #fff;
+    color: var(--text);
+    cursor: pointer;
+    transition: all .12s;
+  }
+  .yn button:hover { border-color: #b9c0e8; }
+  .yn button.sel-yes { border-color: #2f9e5b; background: #eafaf0; color: #217a44; }
+  .yn button.sel-no  { border-color: #d64b4b; background: #fdeeee; color: #b03636; }
+
+  /* result */
+  .swatch {
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    margin: 6px auto 22px;
+    box-shadow: 0 8px 26px rgba(0,0,0,.18);
+  }
+  .result-name { font-weight: 800; font-size: 1.15rem; margin-bottom: 6px; }
+  .result-feedback {
+    font-size: 1.05rem;
+    background: #f4f5fa;
+    border-radius: 14px;
+    padding: 18px;
+    margin: 8px 0 24px;
+    word-break: keep-all;
+  }
+  .error { color: #c0392b; font-size: .95rem; }
+  .footnote { margin-top: 16px; font-size: .8rem; color: var(--muted); }
+</style>
+</head>
+<body>
+  <div class="card">
+
+    <!-- 1. 인트로 -->
+    <section id="screen-intro" class="screen active">
+      <div style="font-size:2.4rem; margin-bottom:6px;">🍀</div>
+      <p class="lead">지금 내가 하는 일이 잘 될지 안 될지 궁금하세요?<br />나는 운이 좋은 사람인지 나쁜 사람인지 궁금하세요?</p>
+      <button class="btn" id="btn-confirm">확인</button>
+    </section>
+
+    <!-- 2. 시작 안내 -->
+    <section id="screen-start" class="screen">
+      <div style="font-size:2.4rem; margin-bottom:10px;">✨</div>
+      <p class="lead">나의 운 테스트를 시작합니다.<br />솔직하게 응답해야 운이 열립니다.</p>
+      <button class="btn" id="btn-start">테스트시작</button>
+    </section>
+
+    <!-- 3. 이니셜 입력 -->
+    <section id="screen-name" class="screen">
+      <h1>이름 이니셜을 입력하세요</h1>
+      <p class="sub" style="margin-bottom:18px;">예: KMS, 홍길동 → ㅎㄱㄷ</p>
+      <input class="field" id="initials" type="text" maxlength="20" placeholder="이니셜 입력" autocomplete="off" />
+      <button class="btn" id="btn-name" disabled>다음</button>
+    </section>
+
+    <!-- 4. 문항 -->
+    <section id="screen-quiz" class="screen">
+      <div class="progress-wrap">
+        <div class="progress-text"><span id="q-index">1</span> / <span id="q-total">0</span></div>
+        <div class="progress-bar"><div class="progress-fill" id="q-fill"></div></div>
+      </div>
+      <div class="question" id="q-text">…</div>
+      <div class="yn">
+        <button type="button" id="btn-yes">YES</button>
+        <button type="button" id="btn-no">NO</button>
+      </div>
+      <button class="btn" id="btn-next" disabled>다음</button>
+    </section>
+
+    <!-- 5. 결과 -->
+    <section id="screen-result" class="screen">
+      <div class="swatch" id="result-swatch"></div>
+      <div class="result-name" id="result-name"></div>
+      <p class="sub" style="margin-bottom:10px;">당신의 운 색깔이 나왔습니다.</p>
+      <div class="result-feedback" id="result-feedback"></div>
+      <button class="btn secondary" id="btn-restart">다시하기</button>
+    </section>
+
+    <!-- 로딩 / 오류 -->
+    <section id="screen-error" class="screen">
+      <p class="error" id="error-text">문항을 불러오지 못했습니다.</p>
+    </section>
+
+  </div>
+
+<script>
+(function () {
+  "use strict";
+
+  var QUESTIONS = [];   // { text, answer: "YES"|"NO" }
+  var FEEDBACK = [];    // { min, max, message }
+  var state = { initials: "", idx: 0, answers: [] };
+
+  // ====== 결과 저장(구글 시트) 설정 ======
+  // 아래 따옴표 안에 Google Apps Script 웹앱 URL을 붙여넣으면
+  // 테스트 결과(이니셜 · % · 날짜)가 구글 시트에 자동 저장됩니다.
+  // 비워두면 저장은 건너뛰고 페이지는 정상 동작합니다.
+  var LOG_ENDPOINT = "https://script.google.com/macros/s/AKfycbwcdJGsK1Ir1VaHhjBAtU-PMw2S0l1GuNlqKvO4xLSARvob2HtH6s7sT-5zsRYSg6UK/exec";
+
+  function logResult(initials, pct) {
+    if (!LOG_ENDPOINT) return;
+    try {
+      fetch(LOG_ENDPOINT, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({
+          initials: initials,
+          percent: Math.round(pct),
+          date: new Date().toISOString()
+        })
+      });
+    } catch (e) { /* 저장 실패해도 결과 화면은 정상 표시 */ }
+  }
+
+  // ---------- 화면 전환 ----------
+  function show(id) {
+    var list = document.querySelectorAll(".screen");
+    for (var i = 0; i < list.length; i++) list[i].classList.remove("active");
+    document.getElementById(id).classList.add("active");
+  }
+
+  // ---------- 텍스트 파싱 ----------
+  function parse(text) {
+    var lines = text.split(/\r?\n/);
+    var section = "";
+    var questions = [], feedback = [];
+    for (var i = 0; i < lines.length; i++) {
+      var raw = lines[i];
+      var line = raw.trim();
+      if (line === "" || line.charAt(0) === "#") continue;
+
+      if (line === "[문항]") { section = "q"; continue; }
+      if (line === "[피드백]") { section = "f"; continue; }
+      if (line.charAt(0) === "[") { section = ""; continue; }
+
+      if (section === "q") {
+        var qp = line.split("|");
+        if (qp.length < 2) continue;
+        var ans = qp[qp.length - 1].trim().toUpperCase();
+        var qtext = qp.slice(0, qp.length - 1).join("|").trim();
+        if (qtext === "" || (ans !== "YES" && ans !== "NO")) continue;
+        questions.push({ text: qtext, answer: ans });
+      } else if (section === "f") {
+        var fp = line.split("|");
+        if (fp.length < 2) continue;
+        var range = fp[0].trim();
+        var msg = fp.slice(1).join("|").trim();
+        var m = range.match(/(\d+)\s*-\s*(\d+)/);
+        if (!m) continue;
+        feedback.push({ min: parseInt(m[1], 10), max: parseInt(m[2], 10), message: msg });
+      }
+    }
+    return { questions: questions, feedback: feedback };
+  }
+
+  // ---------- 색 보간 ----------
+  // 앵커: 10%빨강 40%분홍 50%초록 60%하늘 100%파랑
+  var ANCHORS = [
+    { p: 10,  c: [229, 57, 53]  },   // 빨강
+    { p: 40,  c: [255, 143, 177] },  // 분홍
+    { p: 50,  c: [67, 160, 71]  },   // 초록
+    { p: 60,  c: [79, 195, 247] },   // 하늘
+    { p: 100, c: [30, 136, 229] }    // 파랑
+  ];
+  function lerp(a, b, t) { return Math.round(a + (b - a) * t); }
+  function colorFor(pct) {
+    if (pct <= ANCHORS[0].p) return rgb(ANCHORS[0].c);
+    if (pct >= ANCHORS[ANCHORS.length - 1].p) return rgb(ANCHORS[ANCHORS.length - 1].c);
+    for (var i = 0; i < ANCHORS.length - 1; i++) {
+      var lo = ANCHORS[i], hi = ANCHORS[i + 1];
+      if (pct >= lo.p && pct <= hi.p) {
+        var t = (pct - lo.p) / (hi.p - lo.p);
+        return rgb([lerp(lo.c[0], hi.c[0], t), lerp(lo.c[1], hi.c[1], t), lerp(lo.c[2], hi.c[2], t)]);
+      }
+    }
+    return rgb(ANCHORS[0].c);
+  }
+  function rgb(c) { return "rgb(" + c[0] + "," + c[1] + "," + c[2] + ")"; }
+
+  // ---------- 피드백 선택 (min 내림차순, S >= min 첫 구간) ----------
+  function feedbackFor(pct) {
+    var sorted = FEEDBACK.slice().sort(function (a, b) { return b.min - a.min; });
+    for (var i = 0; i < sorted.length; i++) {
+      if (pct >= sorted[i].min) return sorted[i].message;
+    }
+    return sorted.length ? sorted[sorted.length - 1].message : "";
+  }
+
+  // ---------- 문항 렌더 ----------
+  var btnYes = document.getElementById("btn-yes");
+  var btnNo = document.getElementById("btn-no");
+  var btnNext = document.getElementById("btn-next");
+
+  function renderQuestion() {
+    var q = QUESTIONS[state.idx];
+    document.getElementById("q-text").textContent = q.text;
+    document.getElementById("q-index").textContent = String(state.idx + 1);
+    document.getElementById("q-total").textContent = String(QUESTIONS.length);
+    document.getElementById("q-fill").style.width =
+      Math.round((state.idx) / QUESTIONS.length * 100) + "%";
+
+    // 이전 선택 복원
+    var chosen = state.answers[state.idx];
+    btnYes.classList.toggle("sel-yes", chosen === "YES");
+    btnNo.classList.toggle("sel-no", chosen === "NO");
+    btnNext.disabled = !chosen;
+    btnNext.textContent = (state.idx === QUESTIONS.length - 1) ? "결과 보기" : "다음";
+  }
+
+  function choose(val) {
+    state.answers[state.idx] = val;
+    btnYes.classList.toggle("sel-yes", val === "YES");
+    btnNo.classList.toggle("sel-no", val === "NO");
+    btnNext.disabled = false;
+  }
+  btnYes.addEventListener("click", function () { choose("YES"); });
+  btnNo.addEventListener("click", function () { choose("NO"); });
+
+  btnNext.addEventListener("click", function () {
+    if (!state.answers[state.idx]) return;
+    if (state.idx < QUESTIONS.length - 1) {
+      state.idx++;
+      renderQuestion();
+    } else {
+      showResult();
+    }
+  });
+
+  // ---------- 결과 ----------
+  function showResult() {
+    var correct = 0;
+    for (var i = 0; i < QUESTIONS.length; i++) {
+      if (state.answers[i] === QUESTIONS[i].answer) correct++;
+    }
+    var pct = QUESTIONS.length ? (correct / QUESTIONS.length * 100) : 0;
+
+    document.getElementById("result-swatch").style.background = colorFor(pct);
+    document.getElementById("result-name").textContent =
+      state.initials ? (state.initials + " 님의 운 색깔") : "당신의 운 색깔";
+    document.getElementById("result-feedback").textContent = feedbackFor(pct);
+    logResult(state.initials, pct);
+    show("screen-result");
+  }
+
+  // ---------- 흐름 버튼 ----------
+  document.getElementById("btn-confirm").addEventListener("click", function () { show("screen-start"); });
+  document.getElementById("btn-start").addEventListener("click", function () { show("screen-name"); });
+
+  var initialsInput = document.getElementById("initials");
+  var btnName = document.getElementById("btn-name");
+  initialsInput.addEventListener("input", function () {
+    btnName.disabled = initialsInput.value.trim() === "";
+  });
+  initialsInput.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && !btnName.disabled) btnName.click();
+  });
+  btnName.addEventListener("click", function () {
+    state.initials = initialsInput.value.trim();
+    state.idx = 0;
+    state.answers = [];
+    renderQuestion();
+    show("screen-quiz");
+  });
+
+  document.getElementById("btn-restart").addEventListener("click", function () {
+    state = { initials: "", idx: 0, answers: [] };
+    initialsInput.value = "";
+    btnName.disabled = true;
+    show("screen-intro");
+  });
+
+  // ---------- 로드 ----------
+  fetch("questions.txt", { cache: "no-store" })
+    .then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.text();
+    })
+    .then(function (text) {
+      var parsed = parse(text);
+      QUESTIONS = parsed.questions;
+      FEEDBACK = parsed.feedback;
+      if (QUESTIONS.length === 0) throw new Error("문항이 없습니다. questions.txt를 확인하세요.");
+      document.getElementById("q-total").textContent = String(QUESTIONS.length);
+    })
+    .catch(function (err) {
+      document.getElementById("error-text").textContent =
+        "문항을 불러오지 못했습니다. (" + err.message + ")\n" +
+        "questions.txt 파일이 같은 폴더에 있는지, 웹서버(또는 GitHub Pages)에서 여는지 확인하세요.";
+      show("screen-error");
+    });
+})();
+</script>
+</body>
+</html>
